@@ -17,6 +17,17 @@ export default defineConfig({
         '@router': resolve('src/renderer/src/router'),
         '@views': resolve('src/renderer/src/views'),
         '@components': resolve('src/renderer/src/components'),
+        '@utils': resolve('src/utils'),
+        '@api': resolve('src/api')
+      }
+    },
+    server: {
+      proxy: {
+        '/api': {
+          target: 'http://uat.crm.xuexiluxian.cn',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, '')
+        }
       }
     },
     plugins: [vue()]

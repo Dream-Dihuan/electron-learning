@@ -23,6 +23,7 @@
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.0",
     "@electron-toolkit/utils": "^3.0.0",
+    "axios": "^1.21.1",
     "pinia": "^4.1.0",
     "pinia-plugin-persist": "^1.0.0",
     "vue-router": "^5.5.0"
