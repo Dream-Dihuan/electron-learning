@@ -6,6 +6,7 @@
         <button @click="changeToken">修改token</button>
         <p>token:{{ store.user.token }}</p>
         <button @click="login">登录</button>
+        <el-button>test</el-button>
     </div>
 </template>
 
