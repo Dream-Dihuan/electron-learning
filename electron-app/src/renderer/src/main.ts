@@ -1,7 +1,7 @@
-import './assets/main.css'
-
 import { createApp } from 'vue'
 import App from './App.vue'
+
+const app = createApp(App)
 
 import router from './router'
 
@@ -9,6 +9,14 @@ import router from './router'
 import { createPinia } from 'pinia'
 //2.3 pinia持久化
 import piniaPluginPersist from 'pinia-plugin-persist'
+
 const store = createPinia()
 store.use(piniaPluginPersist)
-createApp(App).use(router).use(store).mount('#app')
+
+app.use(router).use(store).mount('#app')
+
+// 3.1 引入icon
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+  app.component(key, component)
+}

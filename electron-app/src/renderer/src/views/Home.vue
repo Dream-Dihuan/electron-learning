@@ -1,36 +1,142 @@
 <template>
-    <div>
-        <h1>
-            主页
-        </h1>
-        <button @click="changeToken">修改token</button>
-        <p>token:{{ store.user.token }}</p>
-        <button @click="login">登录</button>
-        <el-button>test</el-button>
+  <div class="login">
+    <!--左侧-->
+    <div class="login_adv">
+      <div class="login_adv_title">
+        <h2>小鹿线</h2>
+        <h4>客户关系管理系统</h4>
+        <p>让业务在线更高效，加速企业数字化升级。</p>
+      </div>
+      <div class="login_adv_mask"></div>
+
+      <div class="login_adv_imgage">
+        <img src="../assets/images/data.png" width="100%" />
+      </div>
+      <div class="login_adv_bottom">© 小鹿线客户管理系统 1.0.11</div>
     </div>
+    <!--右侧-->
+    <div class="login-main">
+      <div class="login-form">
+        <div class="login-header">
+          <div class="login-img">
+            <img src="../assets/images/logo.png" alt="" />
+            <label>小鹿线客户管理系统</label>
+          </div>
+        </div>
+        <el-tabs>
+          <el-tab-pane label="账号登录" lazy>User</el-tab-pane>
+          <el-tab-pane label="手机号登录" lazy>Config</el-tab-pane>
+        </el-tabs>
+        <template v-if="true">
+          <el-divider>其他登录方式</el-divider>
+          <div class="login-oauth">
+            <!--微信按钮-->
+            <el-button type="success" circle size="large">
+              <el-icon size="large">
+                <ChatDotRound />
+              </el-icon>
+            </el-button>
+          </div>
+        </template>
+      </div>
+    </div>
+  </div>
 </template>
 
-<script setup lang="ts">
-import { useStore } from '@renderer/store'
-import {loginByJson} from "@api/login"
-
-const store = useStore()
-console.log("全局变量-用户姓名:"+ store.user.name)
-const changeToken = ():string => {
-    store.user.token = "this is Dihuan's token"
-    return "ok"
+<style scoped>
+.login {
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+  display: flex;
+}
+.login_adv {
+  background: url('../assets/images/auth_banner.jpg') no-repeat;
+  width: 40%;
+  position: relative;
+}
+.login_adv_title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 40px;
+  color: #fff;
+}
+.login_adv_title h2 {
+  font-size: 40px;
+}
+.login_adv_title h4 {
+  font-size: 18px;
+  margin-top: 10px;
+}
+.login_adv_title p {
+  font-size: 14px;
+  margin-top: 10px;
+  line-height: 1.8;
+  color: rgb(255, 255, 255, 0.6);
+}
+.login_adv_imgage {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 80px;
+  padding: 40px;
+  z-index: 3;
+}
+.login_adv_imgage img {
+  width: 100%;
+  height: 100%;
+}
+.login_adv_bottom {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  color: #fff;
+  padding: 0 40px 40px 40px;
+}
+.login_adv_mask {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
 }
 
-const loginData = {
-    "password": "1899ddee9d860a0c452dd91844cb7a1c",//密码（需要使用AES加密）
-    "username": "6a89e60b1231d61d4bf89a08e4fc6229",//用户名（需要使用AES加密）
-    "key": "123",//图形验证码中随机UUID
-    "captcha": "2f3j"
+.login-main {
+  flex: 1;
+  display: flex;
+  overflow: auto;
 }
-
-const login = async ():any => {
-   let res =  await loginByJson(loginData);
-   console.log(res);
-   return res;
+.login-form {
+  width: 400px;
+  margin: auto;
+  padding: 80px 0 0 0;
 }
-</script>
+.login-header {
+  margin-bottom: 40px;
+}
+.login-header .login-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-header .login-img img {
+  width: 40px;
+  height: 40px;
+  vertical-align: bottom;
+  margin-right: 10px;
+}
+.login-header .login-img label {
+  font-size: 26px;
+  font-weight: bold;
+}
+.login-oauth {
+  display: flex;
+  justify-content: space-around;
+}
+</style>
