@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import {beforeEachLogFunction,afterEachLogFunction} from './guards'
-import { routes } from './routes'
+import {beforeEachLogFunction,afterEachLogFunction} from '@router/guards'
+import { routes } from '@router/routes.ts'
 const router = createRouter({
   history: createWebHashHistory(), //hash模式
   routes: routes
