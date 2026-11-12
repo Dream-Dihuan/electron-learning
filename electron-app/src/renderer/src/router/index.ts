@@ -1,14 +1,21 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-import {beforeEachLogFunction,afterEachLogFunction} from '@router/guards'
-import { routes } from '@router/routes.ts'
+import { createRouter, createWebHashHistory } from "vue-router";
+
+//引入路由表
+import { AppRoutes } from './routes'
+//引入导航守卫
+import {  beforeEach  , afterEach  } from './guards'
+
 const router = createRouter({
-  history: createWebHashHistory(), //hash模式
-  routes: routes
+    history: createWebHashHistory(),
+    routes:AppRoutes
 })
 
-// 全局前置路由守卫
-router.beforeEach(beforeEachLogFunction)
-// 全局后置路由守卫
-router.beforeEach(afterEachLogFunction)
 
-export default router
+//全局前置导航守卫
+router.beforeEach( beforeEach )
+
+//全局后置导航守卫
+router.afterEach( afterEach )
+
+
+export default router;

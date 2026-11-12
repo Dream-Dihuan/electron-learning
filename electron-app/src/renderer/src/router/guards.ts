@@ -1,8 +1,10 @@
-//全局前置导航守卫
-export const beforeEachLogFunction = async (to) => {
-  console.log(`前置路由守卫日志打印,来源：${to.path}`)
+//前置
+export const beforeEach = ()=>{
+    console.log('前置');
+    return true;
 }
-//全局后置导航守卫
-export const afterEachLogFunction = () => {
-  console.log(`后置路由守卫日志打印`)
+
+//后置
+export const afterEach = ()=>{
+    console.log('后置');
 }
