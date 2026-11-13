@@ -1,4 +1,4 @@
-import { app, shell, BrowserWindow } from 'electron'
+import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
@@ -6,10 +6,13 @@ import icon from '../../resources/icon.png?asset'
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 670,
+    minWidth: 900,
+    minHeight: 670,
     show: false,
     autoHideMenuBar: true,
+    // titleBarStyle: 'hidden', //隐藏标题
+    frame: false,// 无边框窗口
+    resizable:false,//是否可以调整窗口大小
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
@@ -34,6 +37,15 @@ function createWindow(): void {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
 }
+
+// 接收渲染进程传来的窗口坐标（自定义拖拽/吸附）
+// 注意：ipcMain.handle 同一通道只能注册一次，所以不要放在 createWindow 内部
+ipcMain.handle('custom-adsorption', (_event, res: { appX: number; appY: number }) => {
+  const mainWindow = BrowserWindow.getFocusedWindow()
+  if (mainWindow) {
+    mainWindow.setPosition(res.appX, res.appY)
+  }
+})
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
